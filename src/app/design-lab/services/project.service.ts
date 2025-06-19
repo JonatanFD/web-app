@@ -41,8 +41,10 @@ export class ProjectService extends BaseService<ProjectResponse> {
 
   getUserBlueprints() {
     const userId = this.userService.getSessionUserId();
+    const url = GET_ALL_USER_BLUEPRINTS(userId);
+    console.log('Fetching user blueprints from:', url);
     return this.http
-      .get<ProjectResponse[]>(GET_ALL_USER_BLUEPRINTS(userId))
+      .get<ProjectResponse[]>(url)
       .pipe(
         map((projects) => ProjectAssembler.toEntitiesFromResponse(projects))
       );
